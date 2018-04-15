@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <title>天际电器</title>
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body ontouchstart="" onmouseover="">
+    <div id="app" v-cloak>
+      <header class="header">
+          <a href="javascript:history.go(-1);" title="返回" class="icon back" ></a>
+          <h1>进入天际</h1>
+      </header>
+      <section class="padT27 padB26">
+          <div class="newsBox">
+            <span class="db newsTitle font48">{{infoDetail.title}}</span>
+            <span class="db font26 newsCont" v-html="infoDetail.content">
+              <!-- 正文start -->
+              <!-- 正文end -->
+            </span>
+          </div>
+          <div class="recipesBox marT24">
+            <div class="padTB40 font26">
+            	<ul class="tagBox">
+                <li v-for="tag in infoDetail.tags">{{tag.name}}</li>
+              </ul>
+            	<ul class="operateBox">
+            		<li class="collectIcon" @click="doCollectOrCancel()">{{isCollectedFlag?'已收藏':'点击收藏'}}</li>	
+            		<li class="circleIcon" @click="doShare()">分享朋友圈</li>	
+            		<li class="wechatIcon" @click="doShare()">分享微信</li>	
+            	</ul>
+            </div>
+          </div>
+      </section>
+
+      <!-- 底部 -->
+      <footer class="footer clearfix">
+          <a :href="item.code+'.html'" class="footerIcon" :class="{'on': currentCode === item.code}" v-for="item in footerMenu">
+            <img class="iconImg" :src="currentCode === item.code ? item.iconActive.Url : item.icon.Url" alt="">
+            {{item.name}}
+          </a>
+      </footer>
+
+      <!-- 在微信打开下载页 start -->
+      <div class="wechat_bg"></div>
+      <div class="wechat">
+        <span class="tip red">Tips:</span>
+        <span class="click_menu">请点击<em class="red">右上角</em>的菜单按钮分享</span>
+        <i class="open"></i>
+      </div>
+    </div>  
+    <script type="text/javascript" src="js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="js/lib/vue.js"></script>
+    <script type="text/javascript" src="js/lib/vue-resource.js"></script>
+    <script type="text/javascript" src="js/lib/swiper.min.js"></script>
+    <script type="text/javascript" src="js/lib/global.js"></script>
+    <!-- 调用微信api start  -->
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script type="text/javascript" src="js/weixin/WxConfig.js"></script>
+    <script type="text/javascript" src="js/weixin/shareConfig.js"></script>
+    <!-- 调用微信api end  -->
+    <script type="text/javascript" src="js/infoDetail.js"></script>
+    <script type="text/javascript">
+        // 轮播
+        var swiper = new Swiper('.full2',{
+            pagination: '.full2 .pagination',
+            paginationClickable: true,
+            speed: 2000,
+            autoplay: false,
+            loop: true
+        });
+        // 轮播比例
+        myJS.imgScale('.j_3019', '30', '19');
+        myJS.imgScale('.j_53', '5', '3');
+        myJS.imgScale('.j_85', '8', '5');
+        myJS.ImgFull('.loadImg','images/error.png');
+    </script>
+  </body>
+</html>

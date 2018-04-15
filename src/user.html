@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <title>天际电器</title>
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <style type="text/css">
+      section{ background-color: #eaebeb; }
+    </style>
+  </head>
+  <body ontouchstart="" onmouseover="">
+    <div id="app" v-cloak>
+      <header class="header">
+          <a href="javascript:history.go(-1);" title="返回" class="icon back" ></a>
+          <h1>个人中心</h1>
+      </header>
+      <section class="padT27 padB26 userCenterBox">
+          <!-- 个人中心 -->
+          <div class="userBox">
+            <div class="userInfo">
+              <img :src="userInfo.headPic" class="avatar" alt="">
+              <span class="userName">{{userInfo.nickname}}</span>
+            </div>
+          </div>
+          <div class="fillList font28 marT24">
+            <a href="javascript:;" class="infoItem arrow" @click="toCollections('news')" >
+              <span class="color00 collIcon">我的收藏</span>
+            </a>
+            <a :href="'tel:'+hotline.number" class="infoItem arrow">
+              <span class="color00 collIcon phoneIcon">客服热线</span>
+            </a>
+            <a href="http://www.tonze.com/wap/service/checksn.aspx" class="infoItem arrow">
+              <span class="color00 collIcon">正品查询</span>
+            </a>
+            <a href="stores.html" class="infoItem arrow">
+              <span class="color00 collIcon">维修导航</span>
+            </a>
+          </div>
+          <!-- <ul class="mid">
+              <li @click="toCollections(collection.code)" class="item" v-for="collection in collections">
+                <img :src="collection.icon.Url" />
+                <span>收藏的{{collection.name}}</span>
+              </li>
+          </ul>
+          <ul class="bottom">
+              <li><a class="db item color00" :href="'tel:'+hotline.number">客服<br>热线<img src="images/icon/phoneIcon.png" class="phoneIcon"></a></li>
+              <li><a class="db item color00" href="http://www.tonze.com/wap/service/checksn.aspx">正品<br>查询</a></li>
+              <li><a class="db item color00" href="stores.html">维修<br>导航</a></li>
+          </ul> -->
+      </section>
+
+      <!-- 底部 -->
+      <footer class="footer clearfix">
+          <a :href="item.code+'.html'" class="footerIcon" :class="{'on': currentCode === item.code}" v-for="item in footerMenu">
+            <img class="iconImg" :src="currentCode === item.code ? item.iconActive.Url : item.icon.Url" alt="">
+            {{item.name}}
+          </a>
+      </footer>
+    </div>
+    <script type="text/javascript" src="js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="js/lib/vue.js"></script>
+    <script type="text/javascript" src="js/lib/vue-resource.js"></script>
+    <script type="text/javascript" src="js/lib/swiper.min.js"></script>
+    <script type="text/javascript" src="js/lib/global.js"></script>
+    <script type="text/javascript" src="js/user.js"></script>
+    <script type="text/javascript">
+        // 轮播
+        var swiper = new Swiper('.full2',{
+            pagination: '.full2 .pagination',
+            paginationClickable: true,
+            speed: 2000,
+            autoplay: false,
+            loop: true
+        });
+        // 轮播比例
+        myJS.imgScale('.j_3019', '30', '19');
+        myJS.imgScale('.j_53', '5', '3');
+        myJS.imgScale('.j_85', '8', '5');
+        myJS.ImgFull('.loadImg','images/error.png');
+    </script>
+  </body>
+</html>

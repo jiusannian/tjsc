@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <title>天际电器</title>
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body ontouchstart="" onmouseover="">
+    <div id="app" v-cloak>
+      <header class="header">
+          <a href="javascript:history.go(-1);" title="返回" class="icon back" ></a>
+          <!-- <div class="clearfix search-box">
+              <input type="button" class="fl search-btn">
+              <input type="text" id="" class="search-txt" placeholder="搜索" value="" maxlength="30">
+          </div> -->
+          <div class="pr search-collapsible">
+            <div class="clearfix searchWhite">
+                <i class="fl search-btn"></i>
+                <input type="text" id="searchword" class="search-txt" placeholder="天际电器" value="" maxlength="30" readonly onclick="location.href='search.html?categoryId=products'">
+                <i class="clear"></i>
+            </div>
+          </div>
+      </header>
+      <section class="padT27 padB26">
+          <!-- 菜单 -->
+          <div class="navBox">
+              <div class="font22 pad24 nav">
+                  <a href="javascript:;" @click="toCategories(item.id,item.isProduct)" class="navIcon" v-for="item in productCategories"><img class="navImg" :src="item.icon.Url" alt="">{{item.name}}</a>
+              </div>
+          </div>
+          <div class="hotCookbook marT24">
+              <ul class="hotCookArticle">
+                <li class="cookArticleItem" v-for="product in adsList">
+                  <!-- <video class="w100 j_85 marT24" :poster="product.picture.Url" autobuffer controls :src="product.video.Url" v-if="product.video.Url" preload="auto" x-webkit-airplay="allow" x5-video-player-type="h5" x5-video-player-fullscreen="true" x5-video-orientation="portraint" webkit-playsinline="true" playsinline="true"></video> -->
+                  <div class="marT24 videoMask" v-if="product.video.Url">
+                    <span class="db j_85 j_mask">
+                      <img :data-src="product.picture.Url" alt="" class="loadImg">
+                    </span>
+                    <video class="w100 j_85" autobuffer controls :src="product.video.Url"></video>
+                  </div>
+                  <img :src="product.picture.Url" v-if="product.picture.Url&&!product.video.Url" class="db w100" alt="">
+                </li>
+              </ul>
+          </div>
+          <div class="productBox marT24">
+              <span class="tip">明星产品</span>
+              <ul class="productList">
+                <li @click="toProductDetail(item.id)" class="productItem" v-for="item in starProducts">
+                  <a href="#" class="db border">
+                    <span class="productImg j_1715">
+                      <img class="loadImg" :data-src="item.picture.Url" />
+                    </span>
+                    <div class="productText">
+                      <span class="title font28 ell">{{item.name}}</span>
+                      <span class="desc font26">{{item.summary}}</span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+              <!-- <div class="padTB40 font26">
+                <a href="#" class="db textC color82">》》》显示更多《《《</a>
+              </div> -->
+              
+          </div>
+      </section>
+
+      <!-- 底部 -->
+      <footer class="footer clearfix">
+          <a :href="item.code+'.html'" class="footerIcon" :class="{'on': currentCode === item.code}" v-for="item in footerMenu">
+            <img class="iconImg" :src="currentCode === item.code ? item.iconActive.Url : item.icon.Url" alt="">
+            {{item.name}}
+          </a>
+      </footer>
+    </div>
+    <script type="text/javascript" src="js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="js/lib/vue.js"></script>
+    <script type="text/javascript" src="js/lib/vue-resource.js"></script>
+    <script type="text/javascript" src="js/lib/swiper.min.js"></script>
+    <script type="text/javascript" src="js/lib/global.js"></script>
+    <script type="text/javascript" src="js/product.js"></script>
+    <script type="text/javascript">
+        // 轮播
+        var swiper = new Swiper('.full2',{
+            pagination: '.full2 .pagination',
+            paginationClickable: true,
+            speed: 2000,
+            autoplay: false,
+            loop: true
+        });
+        // 轮播比例
+        myJS.imgScale('.j_3019', '30', '19');
+        myJS.imgScale('.j_53', '5', '3');
+        myJS.imgScale('.j_85', '8', '5');
+        myJS.ImgFull('.loadImg','images/error.png');
+    </script>
+  </body>
+</html>

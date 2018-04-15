@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <title>天际电器</title>
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script charset="utf-8" src="http://map.qq.com/api/js?v=2.exp"></script>
+    <script>
+    var geocoder,map,marker = null;
+    var loc;
+    var init = function() {
+        var center = new qq.maps.LatLng(39.916527,116.397128);
+        map = new qq.maps.Map(document.getElementById('container'),{
+            center: center,
+            zoom: 15
+        });
+        //调用地址解析类
+        geocoder = new qq.maps.Geocoder({
+            complete : function(result){
+                vm.loc = result.detail.location;
+                vm.locat();
+            }
+        });
+    }()
+
+
+    function useGeocoder(address){
+        //geocoder.getLocation("北京,海淀区,海淀大街38号");
+        geocoder.getLocation(address.querySelector('.weui-media-box__title').innerHTML);
+    }
+    </script>
+    <style type="text/css">
+      html,body{ background-color: #f8f8f8;}
+      body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        #markPage {
+            position: relative;
+            width: 100%;
+        }
+    </style>
+  </head>
+  <body ontouchstart="" onmouseover="">
+    <div id="app" v-cloak>
+      <header class="header">
+          <a href="javascript:history.go(-1);" title="返回" class="icon back" ></a>
+          <!-- <div class="clearfix search-box">
+              <input type="button" class="fl search-btn">
+              <input type="text" id="" class="search-txt" placeholder="搜索" value="" maxlength="30">
+          </div> -->
+          <div class="pr search-collapsible">
+            <div class="clearfix searchWhite">
+                <i class="fl search-btn" @click="getLocat()"></i>
+                <input type="text" id="searchword" class="search-txt" placeholder="搜门店" v-model="keyword" maxlength="30">
+                <i class="clear"></i>
+            </div>
+          </div>
+      </header>
+      <section class="padT27 padB26">
+          <div class="selectBox">
+            <span class="selectName">选择地区</span>
+            <span class="selectValue" id="picker5">广东 汕头 金平区</span>
+          </div>
+          
+          <!-- 接收到位置信息后 通过 iframe 嵌入位置标注组件 -->
+          <iframe id="markPage" frameborder=0 scrolling="no" src=""></iframe>
+          <!-- <ul>
+            <li class="" >
+              <div>
+                <span>天际</span>
+                <div>
+                  <span>天际</span>
+                  <span>广东省汕头市金平区金新路</span>
+                </div>
+                <span>家具建材</span>
+              </div>
+              <div>
+                <span>电话</span>
+                <span>到这去</span>
+              </div>
+            </li>
+          </ul> -->
+      </section>
+      
+      <!-- 底部 -->
+      <footer class="footer clearfix">
+          <a :href="item.code+'.html'" class="footerIcon" :class="{'on': currentCode === item.code}" v-for="item in footerMenu">
+            <img class="iconImg" :src="currentCode === item.code ? item.iconActive.Url : item.icon.Url" alt="">
+            {{item.name}}
+          </a>
+      </footer>
+    </div>
+    <script type="text/javascript" src="js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="js/lib/vue.js"></script>
+    <script type="text/javascript" src="js/lib/vue-resource.js"></script>
+    <script type="text/javascript" src="js/lib/swiper.min.js"></script>
+    <script type="text/javascript" src="js/lib/global.js"></script>
+    <script type="text/javascript" src="js/stores.js"></script>
+    <script type="text/javascript" src="js/lib/picker.min.js"></script>
+    <script type="text/javascript" src="js/lib/city.js"></script>
+    <script type="text/javascript" src="js/lib/index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
+    <meta name="format-detection" content="telephone=no, email=no">
+    <title>天际电器</title>
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body ontouchstart="" onmouseover="">
+    <div id="app" v-cloak>
+      <header class="header">
+          <a href="javascript:history.go(-1);" title="返回" class="icon back" ></a>
+          <h1>天际食谱</h1>
+      </header>
+      <section class="padT27 padB26">
+          <div class="recipesBox marT24">
+            <div class="videoBox" v-if="recipeDetail.picture">
+              <div class="marT24 videoMask" v-if="recipeDetail.video.Url">
+                <span class="db j_85 j_mask">
+                  <img :data-src="recipeDetail.picture.Url" alt="" class="loadImg">
+                </span>
+                <video class="w100 j_85" autobuffer controls :src="recipeDetail.video.Url"></video>
+              </div>
+              <img class="w100" v-else :src="recipeDetail.picture.Url" alt="">
+            </div>
+            <span class="recipesTip">{{recipeDetail.title}}</span>
+            
+            <ul class="materialList">
+              <li class="materialItem">
+              	<span class="materialTip">用料</span>
+              </li>
+              <li class="materialItem" v-for="materialItem in recipeDetail.materials">
+                <div class="materialText" style="flex: 2; -webkit-flex: 2;">
+                  <span class="title font32 color33">{{materialItem.name}}</span>
+                </div>
+                <div class="materialText">
+                  <span class="title font32 color33">{{materialItem.amount}}</span>
+                </div>
+              </li>
+            </ul>
+            <ul class="processList marT24">
+              <li class="processItem" v-for="(step,index) in recipeDetail.steps">
+                <div class="processText">
+                  <span class="title font32 colora3">步骤 {{index+1}}</span>
+                  <span class="db font28 colora3">{{step.content}}</span>
+                </div>
+                <span v-if="step.picture.Url" class="marL24 processImg j_85"><img :data-src="step.picture.Url" class="loadImg" alt=""></span>
+              </li>
+              <!-- 价值 -->
+              <li class="processItem">
+                <div class="processText">
+                  <span class="title font32 colora3">养生心得</span>
+                  <span class="db font28 colora3">{{recipeDetail.value}}</span>
+                </div>
+              </li>
+            </ul>
+            <div class="padTB40 font26">
+            	<ul class="tagBox">
+            		<li v-for="tag in recipeDetail.tags">{{tag.name}}</li>
+            	</ul>
+            	<ul class="operateBox">
+                <li class="collectIcon" @click="doCollectOrCancel()">{{isCollectedFlag?'已收藏':'点击收藏'}}</li>  
+                <li class="circleIcon" @click="doShare()">分享朋友圈</li>  
+                <li class="wechatIcon" @click="doShare()">分享微信</li> 
+              </ul>
+            </div>
+          </div>
+          <div class="cookSchool marT24">
+              <span class="tip">美味天下</span>
+              <ul class="cookSchoolArticle">
+                <li class="cookSchoolItem" v-for="recipe in tastyRecipes" @click="toRecipeDetail(recipe.id)" >
+                  <span class="articleImg j_85"><img :data-src="recipe.picture.Url" class="loadImg" alt=""></span>
+                  <span class="db font32 padTB24 ell">{{recipe.title}}</span>
+                </li>
+              </ul>
+              <!-- <div class="padTB40 font26">
+                <a href="#" class="db textC color82">》》》显示更多《《《</a>
+              </div> -->
+              
+          </div>
+      </section>
+
+      <!-- 底部 -->
+      <footer class="footer clearfix">
+          <a :href="item.code+'.html'" class="footerIcon" :class="{'on': currentCode === item.code}" v-for="item in footerMenu">
+            <img class="iconImg" :src="currentCode === item.code ? item.iconActive.Url : item.icon.Url" alt="">
+            {{item.name}}
+          </a>
+      </footer>
+
+      <!-- 在微信打开下载页 start -->
+      <div class="wechat_bg"></div>
+      <div class="wechat">
+        <span class="tip red">Tips:</span>
+        <span class="click_menu">请点击<em class="red">右上角</em>的菜单按钮分享</span>
+        <i class="open"></i>
+      </div>
+    </div>  
+    <script type="text/javascript" src="js/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="js/lib/vue.js"></script>
+    <script src="https://cdn.bootcss.com/babel-polyfill/6.23.0/polyfill.min.js"></script>
+    <script type="text/javascript" src="js/lib/vue-resource.js"></script>
+    <script type="text/javascript" src="js/lib/swiper.min.js"></script>
+    <script type="text/javascript" src="js/lib/global.js"></script>
+    <script type="text/javascript" src="js/recipeDetail.js"></script>
+    <script type="text/javascript">
+        // 轮播
+        var swiper = new Swiper('.full2',{
+            pagination: '.full2 .pagination',
+            paginationClickable: true,
+            speed: 2000,
+            autoplay: false,
+            loop: true
+        });
+        // 轮播比例
+        myJS.imgScale('.j_3019', '30', '19');
+        myJS.imgScale('.j_53', '5', '3');
+        myJS.imgScale('.j_85', '8', '5');
+        myJS.ImgFull('.loadImg','images/error.png');
+    </script>
+  </body>
+</html>
